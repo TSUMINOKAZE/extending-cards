@@ -1,26 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { FC, useState } from 'react';
+import './styles/app.scss';
+import { data } from './data';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App: FC = () => {
+	const [extended, setExtended] = useState<number>(0);
+
+	return (
+		<div className='container'>
+			{data.map((card, idx) => (
+				<div
+					key={idx}
+					className={`card${idx === extended ? ' extended' : ''}`}
+					onClick={() => setExtended(idx)}
+				>
+					<img src={card.image} alt={card.title} />
+					<span>{card.title}</span>
+				</div>
+			))}
+		</div>
+	);
+};
 
 export default App;
